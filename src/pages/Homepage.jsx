@@ -1,0 +1,3 @@
+/**
+ * Homepage displaying all posts
+ */
