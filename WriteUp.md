@@ -9,3 +9,5 @@ With your submission, you must include a writeup that touches on the following p
 - What assumptions did you make while working on this assignment?
 
 - How long did this assignment take to complete?
+
+- Google Doc: https://docs.google.com/document/d/1NaUnAeZwf0iqX6MfndSHU58m0q4tHicue5bLFZ3QVgc/edit?usp=sharing
