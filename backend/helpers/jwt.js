@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 
 
-const SECRET_KEY = "bananabanananbanan";
+const SECRET_KEY = "hihihihihihihi";
 
 function generateToken(payload) {
 
     return jwt.sign({payload}, SECRET_KEY, {
+        // Token expires in 14 days
         expiresIn: '14d'
     });
 

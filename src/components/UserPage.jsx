@@ -1,3 +1,0 @@
-/**
- * User profile page component
- */
