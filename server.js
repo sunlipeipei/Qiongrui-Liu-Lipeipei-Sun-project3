@@ -1,7 +1,11 @@
+/**
+ * Main server file
+ */
+
 const express = require('express');
 const helper = require('./helper');
-const post = require('./route/post.route');
-const user = require('./route/user.route');
+const post = require('./backend/routes/post.route');
+const user = require('./backend/routes/user.route');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const app = express();

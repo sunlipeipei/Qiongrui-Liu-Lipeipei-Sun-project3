@@ -1,0 +1,3 @@
+/**
+ * Display user profile details
+ */
