@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@jridgewell/gen-mapping": "^0.3.6",
     "axios": "^1.7.7",
     "cookie-parser": "^1.4.7",
     "express": "^4.21.1",
