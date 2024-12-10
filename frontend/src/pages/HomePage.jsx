@@ -6,15 +6,15 @@ import '../styles/HomePage.css';
 
 import React, { useState } from 'react';
 
+import PostList from '../components/PostList';
+
 const HomePage = () => {
     const [message, setMessage] = useState("Welcome!");
 
     return (
         <div>
             <h1>{message}</h1>
-            <button onClick={() => setMessage("Button clicked Test")}>
-                Test Button
-            </button>
+            <PostList />
         </div>
     );
 };
