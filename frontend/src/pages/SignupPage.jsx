@@ -9,4 +9,16 @@
  * 2. Update this `main.jsx` file to remove the `/signup` path accordingly.
  * 
  */
-import './styles/SignupPage.css';
+import '../styles/SignupPage.css';
+
+import React from 'react';
+
+const SignupPage = () => {
+  return (
+    <div>
+      <p>content</p>
+    </div>
+  );
+};
+
+export default SignupPage;
