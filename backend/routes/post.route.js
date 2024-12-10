@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const postModel = require('./db/post.model');
-const jwtHelpers = require('./helpers/jwt');
+const postModel = require('../db/post.model');
+const jwtHelpers = require('../helpers/jwt');
 
 // Get: Retrieve all posts (sorted by timestamp in descending order)
 // http://localhost:3000/api/post/

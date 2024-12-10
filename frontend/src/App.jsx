@@ -1,11 +1,7 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import {
-    createBrowserRouter,
-    RouterProvider,
-  } from "react-router-dom";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Homepage from './pages/Homepage.jsx';
+import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import UserPage from './pages/UserPage.jsx';
@@ -14,7 +10,7 @@ import SearchResultPage from './pages/SearchResultPage.jsx';
 const router = createBrowserRouter([
     {
       path: '/',
-      element: <Homepage />,
+      element: <HomePage />,
     },
     {
       path: '/login',
@@ -34,8 +30,8 @@ const router = createBrowserRouter([
   },
   ]);
   
-  createRoot(document.getElementById('root')).render(
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>
-  );
+  const App = () => {
+    return <RouterProvider router={router} />;
+  };
+  
+  export default App;

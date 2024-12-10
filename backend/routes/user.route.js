@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const userModel = require('./db/user.model');
-const jwtHelpers = require('./helpers/jwt');
-const { authorizeDeletion } = require('./middlewares/auth.middleware');
+const userModel = require('../db/user.model');
+const jwtHelpers = require('../helpers/jwt');
+const { authorizeDeletion } = require('../middlewares/auth.middleware');
 
 // Signup
 // http://localhost:3000/api/user/signup

@@ -4,8 +4,8 @@
 
 const express = require('express');
 const helper = require('./helper');
-const post = require('./backend/routes/post.route');
-const user = require('./backend/routes/user.route');
+const post = require('./routes/post.route');
+const user = require('./routes/user.route');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const app = express();
@@ -35,8 +35,8 @@ app.post('/', function(request, response) {
     response.send('Hello from the POST API in the Express server');
 })
 
-// to do: add MongoDB Link
-const mongoEndpoint = '';
+// to do: add MongoDB Link, change to our MongoDB
+const mongoEndpoint = 'mongodb+srv://hunter:banana2@seawebdevfall2021.ykjok.mongodb.net/?retryWrites=true&w=majority&appName=SeaWebDevFall2021';
 mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
 
 const db = mongoose.connection;
