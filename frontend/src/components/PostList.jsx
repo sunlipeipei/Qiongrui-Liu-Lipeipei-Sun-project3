@@ -1,6 +1,5 @@
 import '../styles/PostList.css';
 import { useState, useEffect } from 'react';
-import { formatDistanceToNow } from 'date-fns';
 
 export default function PostList() {
     // Mocked post data
