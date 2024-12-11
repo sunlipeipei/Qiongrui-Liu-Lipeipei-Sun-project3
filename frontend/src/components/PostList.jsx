@@ -10,26 +10,7 @@ import { Link } from "react-router-dom";
 import PostForm from './PostForm';
 
 export default function PostList({username}) {
-    // Mocked post data
-    // const postDetailStateTest = {
-    //     "posts": [
-    //         {
-    //             "id": 1,
-    //             "username": "Peipei",
-    //             "content": "This is a mocked post",
-    //             "timestamp": "2023-12-10T10:00:00Z"
-    //         },
-    //         {
-    //             "id": 2,
-    //             "username": "Qiongrui",
-    //             "content": "This is a mocked post",
-    //             "timestamp": "2023-11-10T10:00:00Z"
-    //         }
-    //     ]
-    // };
-    // const userNameTest = "Peipei"
 
-    // const {user} = useContext(AuthContext); // Current active user
     const { user: activeUser } = useContext(AuthContext); // Logged-in user
     const [postDetailState, setPostDetailState] = useState(null);
     const [errorMsgState, setErrorMsgState] = useState(null);
@@ -48,9 +29,8 @@ export default function PostList({username}) {
             const filteredPosts = username
                 ? allPosts.filter((post) => post.username === username)
                 : allPosts;
-            setPostDetailState(filteredPosts);
-            // Simulating a successful API call with mocked data
-            // setPostDetailState(postDetailStateTest);
+            const sortedPosts = filteredPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            setPostDetailState(sortedPosts);
         } catch (error) {
             setErrorMsgState('Failed to fetch posts. Please try again.');
             console.error(error);
