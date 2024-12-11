@@ -84,7 +84,6 @@ export default function UserProfile(){
                                         day: 'numeric',
                                     })}
                         </small>
-                        {/* <p>{userState.description || 'No description available'}</p> */}
                         {editingUserDesc ? (
                             <form onSubmit={updateUserDescription}>
                                 <textarea
