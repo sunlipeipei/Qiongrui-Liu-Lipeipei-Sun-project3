@@ -57,14 +57,19 @@ router.post('/login', async function (req, res) {
 });
 
 // Log out
-router.post('/logout', function(request, response) {
-    response.clearCookie('userToken'); // doesn't delete the cookie, but expires it immediately
-    response.send({message: 'Logged out successfully'});
+router.post('/logout', function(req, res) {
+    // response.clearCookie('userToken'); // doesn't delete the cookie, but expires it immediately
+    res.clearCookie('userToken', { 
+        httpOnly: true, 
+        secure: process.env.NODE_ENV === 'production', 
+        sameSite: 'strict',
+    });
+    res.send({message: 'Logged out successfully'});
 })
 
 // Login Status
 router.get('/isLoggedIn', (req, res) => {
-    const token = req.cookies.userToken || req.headers.authorization?.split(' ')[1];
+    const token = req.cookies.userToken;
     if (!token) {
         return res.status(401).send('Not logged in');
     }
@@ -73,6 +78,11 @@ router.get('/isLoggedIn', (req, res) => {
         const decoded = jwtHelpers.decrypt(token);
         res.status(200).send({ username: decoded.username, isAdmin: decoded.isAdmin });
     } catch (error) {
+        res.clearCookie('userToken', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+        }); // Clear invalid cookies
         res.status(401).send('Invalid token');
     }
 });
