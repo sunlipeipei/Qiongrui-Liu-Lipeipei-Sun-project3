@@ -8,7 +8,6 @@ import { AuthContext } from '../context/AuthContext';
 import { useParams } from 'react-router-dom';
 
 export default function UserProfile(){
-    const { user: activeUser } = useContext(AuthContext); // Logged-in user
     const {userName} = useParams();
     const [userState, setUserState] = useState(null)
     const [loadingState, setLoadingState] = useState(true);
