@@ -7,6 +7,8 @@
 import '../styles/HomePage.css';
 import { AuthContext } from '../context/AuthContext';
 import React, { useContext } from 'react';
+import { useState } from 'react';
+import PostList from '../components/PostList';
 
 const HomePage = () => {
     const { user, loading } = useContext(AuthContext);
@@ -43,6 +45,8 @@ const HomePage = () => {
                 <h3>Posts</h3>
                 <p>Here would be all the posts, displayed for everyone.</p>
             </div>
+            <h1>{message}</h1>
+            <PostList />
         </div>
     );
 };
