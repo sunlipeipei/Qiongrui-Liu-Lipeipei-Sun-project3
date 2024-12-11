@@ -68,9 +68,9 @@ export default function PostList() {
         try {
             await axios.put(`/api/post/${updatedPost._id}`, updatedPost);
             getPosts();
-            setEditingPostId(null);
+            setEditingPostStatus(null);
         } catch (error) {
-            setErrorMsg('Failed to update the post. Please try again.');
+            setErrorMsgState('Failed to update the post. Please try again.');
             console.error(error);
         }
     };
