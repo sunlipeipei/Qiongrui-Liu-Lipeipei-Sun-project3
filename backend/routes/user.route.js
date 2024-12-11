@@ -167,16 +167,19 @@ router.delete('/:username', authorizeDeletion, async function (req, res) {
 // Extra Credit: Search for Users
 // http://localhost:8000/api/user/search?q=ter
 router.get('/search', async function (req, res) {
+    console.log('Search route reached'); // debug
     const searchQuery = req.query.q; 
+    console.log('Search route hit with query:', searchQuery); // debug
     if (!searchQuery) {
-        res.status(400).send('Search query is required');
-        return;
+        return res.status(400).send('Search query is required');
     }
 
     try {
         const users = await userModel.searchUsersByName(searchQuery);
+        console.log('Found users:', users); // debug
         res.status(200).send(users);
     } catch (error) {
+        console.error('Error searching for users:', error);
         res.status(500).send('Unable to search for users.');
     }
 });
