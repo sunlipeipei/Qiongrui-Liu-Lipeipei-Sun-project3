@@ -12,12 +12,14 @@ export default function UserProfile(){
     const [userState, setUserState] = useState(null)
     const [loadingState, setLoadingState] = useState(true);
     const [errorMsgState, setErrorMsgState] = useState(null);
+    const [editingUserDesc, setEditingUserDesc] = useState(false);
+    const [userDescState, setUserDescState] = useState('')
 
     useEffect(() => {
-        fetchUserData();
+        getUserData();
     }, [userName]);
 
-    async function fetchUserData() {
+    async function getUserData() {
         try {
             setLoadingState(true)
             const response = await axios.get(`/api/user/${userName}`);
@@ -30,6 +32,26 @@ export default function UserProfile(){
             setLoadingState(false);
         }
     }
+
+    async function updateUserDescription(e){
+        e.preventDefault();
+        try {
+            const updatedDescription = {description : userDescState};
+            console.log(updateUserDescription)
+            await axios.put(
+                // `api/user/${userName}/description`,
+                `http://localhost:8000/api/user/${userName}/description`,
+                { description: userDescState },
+                { withCredentials: true }
+            );
+            console.log('API Response:', response.data);
+            getUserData();
+            setEditingUserDesc(false);
+        } catch (error) {
+            console.error('Error updating description:', error.response?.data || error.message);
+            setErrorMsgState('Failed to update the post. Please try again.');
+        }
+    };
 
     if (loadingState) {
         return <div>Loading posts...</div>
@@ -52,8 +74,6 @@ export default function UserProfile(){
                 {/* Check if userState is defined before accessing its properties */}
                 {userState ? (
                     <>
-                        <h1 >{userState.username}</h1>
-                        <p>{userState.description || 'No description available'}</p>
                         <small className="timeStamp">
                         Joined since {new Date(userState.timestamp).toLocaleDateString('en-US', {
                                         year: 'numeric',
@@ -61,6 +81,32 @@ export default function UserProfile(){
                                         day: 'numeric',
                                     })}
                         </small>
+                        <h1 >{userState.username}</h1>
+                        {/* <p>{userState.description || 'No description available'}</p> */}
+                        {editingUserDesc ? (
+                            <form onSubmit={updateUserDescription}>
+                                <textarea
+                                    placeholder="Edit your description"
+                                    value={userDescState}
+                                    onChange={(e) => setUserDescState(e.target.value)}
+                                    className="post-textarea"
+                                />
+                                <button type="submit" className="post-button">
+                                    Save
+                                </button>
+                                <button
+                                    type="button"
+                                    className="cancel-button"
+                                    onClick={() => setEditingUserDesc(false)}
+                                >
+                                    Cancel
+                                </button>
+                            </form>
+                        ) : (
+                            <p>{userState.description || 'No description available'}</p>
+                        )}
+                        
+                        <button onClick={() => setEditingUserDesc(true)}>Edit description</button>
                     </>
                 ) : (
                     <p>User data is not available.</p>
