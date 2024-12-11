@@ -6,6 +6,7 @@ import '../styles/HomePage.css';
 import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import PostList from '../components/PostList';
+import UserProfile from '../components/UserProfile';
 
 const HomePage = () => {
     const { user, loading } = useContext(AuthContext);
@@ -16,7 +17,7 @@ const HomePage = () => {
 
     return (
         <div className="homepage">
-            <h1>Welcome to the Homepage.</h1>
+            {/* <h1>Welcome to the Homepage.</h1>
             {user ? (
                 <h2>Welcome back, {user.username}!</h2>
             ) : (
@@ -27,9 +28,8 @@ const HomePage = () => {
                 {user
                     ? 'You can create, edit, and delete posts.'
                     : 'Log in to interact with posts. You can still view all posts below.'}
-            </p>
-
-            {/* Render the PostList component */}
+            </p> */}
+            {/* {user ? <div className='user'><h1>{user.username}</h1></div>: <></>} */}
             <PostList />
         </div>
     );
