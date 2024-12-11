@@ -124,7 +124,7 @@ router.put('/:username/description', async function (req, res) {
         return;
     }
 
-    const tokenUsername = jwtHelpers.decrypt(req.cookies.userToken);
+    const tokenUsername = jwtHelpers.decrypt(req.cookies.userToken).username;
     if (!tokenUsername || tokenUsername !== username) {
         res.status(403).send('You can only update your own description');
         return;
