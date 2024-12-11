@@ -41,8 +41,7 @@ app.post('/', function(request, response) {
 })
 
 // MongoDB connection
-// to do: add MongoDB Link, change to our MongoDB
-const mongoEndpoint = 'mongodb+srv://hunter:banana2@seawebdevfall2021.ykjok.mongodb.net/?retryWrites=true&w=majority&appName=SeaWebDevFall2021';
+const mongoEndpoint = 'mongodb+srv://averyl:T-aTmkTMsdPH7C3@seawebdev.jtp1r.mongodb.net/?retryWrites=true&w=majority&appName=SeaWebDev';
 mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
 
 const db = mongoose.connection;
