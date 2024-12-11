@@ -1,17 +1,21 @@
 import '../styles/LoginPage.css';
-import React from 'react';
+import React, { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import { AuthContext } from '../context/AuthContext';
 
 const LoginPage = () => {
-  const handleLoginSuccess = (token) => {
-    console.log('Token received:', token);
-    // Set token in global state, cookies, or localStorage
-  };
+  const { user } = useContext(AuthContext);
+
+  // if user already log in, direct to HomePage
+  if (user) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
-    <div>
-      <LoginForm onLoginSuccess={handleLoginSuccess} />
+    <div className="login-page">
+      <h1>Login Page</h1>
+      <LoginForm />
     </div>
   );
 };

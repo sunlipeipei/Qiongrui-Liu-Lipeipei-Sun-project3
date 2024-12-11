@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import '../styles/LoginForm.css';
+import { AuthContext } from '../context/AuthContext';
 
-const LoginForm = ({ onLoginSuccess }) => {
+const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault(); // prevent form default submission behavior
@@ -13,8 +15,11 @@ const LoginForm = ({ onLoginSuccess }) => {
 
     try {
       const response = await axios.post('/api/user/login', { username, password });
+      const { token } = response.data;
+
+      // use context to update user status
+      login(token, { username });
       alert('Login successful!');
-      onLoginSuccess(response.data.token); // pass token to parent component or state
     } catch (err) {
       console.error(err.response?.data || 'Login error');
       setError(err.response?.data || 'Invalid username or password');
