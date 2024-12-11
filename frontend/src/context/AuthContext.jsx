@@ -36,11 +36,24 @@ const AuthProvider = ({ children }) => {
       setUser(userInfo);
     };
 
-    // Logout function
-    const logout = () => {
-      localStorage.removeItem('userToken');
-      setUser(null);
-    };
+    // // Logout function
+    // const logout = () => {
+    //   localStorage.removeItem('userToken');
+    //   setUser(null);
+    // };
+
+    const logout = async () => {
+      try {
+          await axios.post('/api/user/logout', {}, { withCredentials: true }); 
+      } catch (error) {
+          console.error('Error during logout:', error);
+      } finally {
+          localStorage.removeItem('userToken'); // Clear token on the client side
+          setUser(null); // Reset user state
+      }
+  };
+
+
 
     return (
       <AuthContext.Provider value={{ user, login, logout, loading }}>
