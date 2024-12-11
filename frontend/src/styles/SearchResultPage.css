@@ -1,0 +1,25 @@
+.search-results-page {
+    padding: 20px;
+}
+  
+.results-list {
+    list-style: none;
+    padding: 0;
+}
+
+.result-link {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
+.result-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+  

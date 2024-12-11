@@ -19,9 +19,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Debug
+app.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.url}`);
+    next();
+});
+
+
 // API Routes
 app.use('/api/post', post);
 app.use('/api/user', user);
+
+// Catch-all debug middleware
+app.use((req, res, next) => {
+    console.log(`Unhandled route: ${req.method} ${req.url}`);
+    next();
+});
 
 app.get('/', function(request, response) {
     const responseString = helper.returnRandomString();
