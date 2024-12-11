@@ -1,0 +1,75 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fdfdfd; 
+    border-bottom: 1px solid #e0e0e0; 
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+  
+.homePage-button {
+    font-size: 1.5rem;
+    color: #333333; 
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.homePage-button:hover {
+    color: #2c6a94; 
+    transform: scale(1.1);
+    text-decoration: underline;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-link {
+    color: #106796; 
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 5px 10px;
+    border: 1px solid #0077b6; 
+    border-radius: 5px;
+    background-color: #ffffff; 
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-link:hover {
+    background-color: #0077b6; 
+    color: #ffffff; 
+}
+
+.navbar-username {
+    font-size: 1rem;
+    color: #333333; 
+    margin-right: 10px;
+}
+
+.navbar-logout {
+    padding: 5px 10px;
+    font-size: 1rem;
+    color: #ffffff; 
+    background-color: #da7727; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.navbar-logout:hover {
+    background-color: #d32f4f; 
+}
+
+.navbar-username {
+    font-size: 1rem;
+    font-weight: bold;
+}
