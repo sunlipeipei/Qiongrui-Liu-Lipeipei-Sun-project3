@@ -25,8 +25,7 @@ exports.UserSchema = new Schema({
   timestamp: {
     type: Date,
     default: Date.now,
-  },
-});
+  },}, { collection: 'Users'});
 
 
 // Extra Credit: Password Encryption
