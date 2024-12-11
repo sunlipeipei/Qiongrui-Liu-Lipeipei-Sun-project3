@@ -7,6 +7,7 @@ With your submission, you must include a writeup that touches on the following p
 - Given more time, what additional features, functional or design changes would you make?
 
 - What assumptions did you make while working on this assignment?
+When a user clicks on a status update, they will be redirected to a page that contains all the details about that user. Our assumption is when click on the user name under the status update.
 
 - How long did this assignment take to complete?
 

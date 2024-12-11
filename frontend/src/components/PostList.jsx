@@ -107,12 +107,7 @@ export default function PostList({username}) {
                 </div>
             )}
 
-            {/* {activeUser && (
-                <div className="post">
-                    <PostForm onPostAdded={() => getPosts()} />
-                </div>
-            )} */}
-            {(!username || (activeUser && activeUser.username === username)) && (
+            {((activeUser &&!username) || (activeUser && activeUser.username === username)) && (
                 <div className="post">
                     <PostForm onPostAdded={() => getPosts()} />
                 </div>
