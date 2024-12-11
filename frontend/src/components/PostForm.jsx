@@ -10,7 +10,7 @@ export default function PostForm({onPostAdded}){
 
     const [contentState, setContentState] = useState('')
     const [errorMsgState, setErrorMsgState] = useState(null)
-    const {auth} = useContext(AuthContext); // Current user
+    const {user} = useContext(AuthContext); // Current user
 
     async function addNewPost() {
         try {
@@ -30,7 +30,7 @@ export default function PostForm({onPostAdded}){
 
     return(
         <div>
-            <h1>{auth.usename}</h1>
+            {/* <h1>{user.username}</h1> */}
             <div >
             <form onSubmit={addNewPost}>
                 <textarea 
