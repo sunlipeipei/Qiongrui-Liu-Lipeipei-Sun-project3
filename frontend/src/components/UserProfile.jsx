@@ -8,6 +8,7 @@ import { AuthContext } from '../context/AuthContext';
 import { useParams } from 'react-router-dom';
 
 export default function UserProfile(){
+    const { user: activeUser } = useContext(AuthContext); // Logged-in user
     const {userName} = useParams();
     const [userState, setUserState] = useState(null)
     const [loadingState, setLoadingState] = useState(true);
@@ -105,8 +106,7 @@ export default function UserProfile(){
                         ) : (
                             <p>{userState.description || 'No description available'}</p>
                         )}
-                        
-                        <button onClick={() => setEditingUserDesc(true)}>Edit description</button>
+                        {activeUser.username === userName ? <button onClick={() => setEditingUserDesc(true)}>Edit description</button> : <></>}
                     </>
                 ) : (
                     <p>User data is not available.</p>
