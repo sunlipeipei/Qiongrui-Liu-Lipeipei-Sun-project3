@@ -2,53 +2,39 @@
  * Homepage displaying all posts
  */
 
-// TODO: Replace the placeholder code below with the actual HomePage implementation.
-// This is for testing AuthContext and NavBar functionality only.
 import '../styles/HomePage.css';
-import { AuthContext } from '../context/AuthContext';
 import React, { useContext } from 'react';
-import { useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import PostList from '../components/PostList';
 
 const HomePage = () => {
     const { user, loading } = useContext(AuthContext);
-    // test
-    console.log('User:', user);
-    console.log('Loading:', loading);
-
 
     if (loading) {
         return <div>Loading...</div>;
     }
-    // test: if user not log in, direct to loginPage
-    // if (!user) {
-    //     return <Navigate to="/login" replace />;
-    // }
 
     return (
-        <div>
-            <h1>Welcome to the Homepage</h1>
+        <div className="homepage">
+            <h1>Welcome to the Homepage.</h1>
             {user ? (
-                <>
-                    <h2>Welcome back, {user.username}!</h2>
-                    <p>You can create, edit, and delete posts.</p>
-                </>
+                <h2>Welcome back, {user.username}!</h2>
             ) : (
-                <>
-                    <h2>Welcome, Visitor!</h2>
-                    <p>You can view posts but need to log in to interact.</p>
-                </>
+                <h2>Hello, Visitor!</h2>
             )}
-            {/* TO DO */}
-            {/* Placeholder for posts - replace with our real posts logic */}
-            <div>
-                <h3>Posts</h3>
-                <p>Here would be all the posts, displayed for everyone.</p>
-            </div>
+
+            <p>
+                {user
+                    ? 'You can create, edit, and delete posts.'
+                    : 'Log in to interact with posts. You can still view all posts below.'}
+            </p>
+
+            {/* Render the PostList component */}
             <PostList />
         </div>
     );
 };
 
 export default HomePage;
+
 
