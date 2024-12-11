@@ -5,7 +5,7 @@ const jwtHelpers = require('../helpers/jwt');
 const { authorizeDeletion } = require('../middlewares/auth.middleware');
 
 // Signup
-// http://localhost:3000/api/user/signup
+// http://localhost:8000/api/user/signup
 router.post('/signup', async function (req, res) {
     const { username, password } = req.body;
 
@@ -29,7 +29,7 @@ router.post('/signup', async function (req, res) {
 
 
 // Login
-// http://localhost:3000/api/user/login
+// http://localhost:8000/api/user/login
 router.post('/login', async function (req, res) {
     const { username, password } = req.body;
 
@@ -74,7 +74,7 @@ router.get('/isLoggedIn', function(request, response) {
 })
 
 // Get
-// http://localhost:3000/api/user/:username
+// http://localhost:8000/api/user/:username
 router.get('/:username', async function (req, res) {
     const username = req.params.username;
 
@@ -100,7 +100,7 @@ router.get('/:username', async function (req, res) {
 
 
 // Update
-// http://localhost:3000/api/user/:username/description
+// http://localhost:8000/api/user/:username/description
 router.put('/:username/description', async function (req, res) {
     const username = req.params.username;
     const { description } = req.body;
@@ -132,7 +132,7 @@ router.put('/:username/description', async function (req, res) {
 
 
 // Delete
-// http://localhost:3000/api/user/:username
+// http://localhost:8000/api/user/:username
 router.delete('/:username', authorizeDeletion, async function (req, res) {
     const username = req.params.username; 
     try {
@@ -151,7 +151,7 @@ router.delete('/:username', authorizeDeletion, async function (req, res) {
 });
 
 // Extra Credit: Search for Users
-// http://localhost:3000/api/user/search?q=ter
+// http://localhost:8000/api/user/search?q=ter
 router.get('/search', async function (req, res) {
     const searchQuery = req.query.q; 
     if (!searchQuery) {
