@@ -85,7 +85,11 @@ export default function PostList() {
 
 
     if (!postDetailState || postDetailState.length === 0) {
-        return <div>No posts available.</div>;
+        return (
+            <div className='post-list'>
+                <div className='post'>Sorry, there is no posts available.</div>
+            </div>
+        );
     }
 
     return (
