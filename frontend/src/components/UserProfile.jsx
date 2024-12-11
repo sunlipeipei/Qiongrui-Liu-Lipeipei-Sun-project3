@@ -14,6 +14,7 @@ export default function UserProfile(){
     const [errorMsgState, setErrorMsgState] = useState(null);
     const [editingUserDesc, setEditingUserDesc] = useState(false);
     const [userDescState, setUserDescState] = useState('')
+    const { user: activeUser } = useContext(AuthContext); // Logged-in user
 
     useEffect(() => {
         getUserData();
@@ -74,6 +75,7 @@ export default function UserProfile(){
                 {/* Check if userState is defined before accessing its properties */}
                 {userState ? (
                     <>
+                        <h1 >{userState.username}</h1>
                         <small className="timeStamp">
                         Joined since {new Date(userState.timestamp).toLocaleDateString('en-US', {
                                         year: 'numeric',
@@ -81,7 +83,6 @@ export default function UserProfile(){
                                         day: 'numeric',
                                     })}
                         </small>
-                        <h1 >{userState.username}</h1>
                         {/* <p>{userState.description || 'No description available'}</p> */}
                         {editingUserDesc ? (
                             <form onSubmit={updateUserDescription}>
@@ -105,8 +106,7 @@ export default function UserProfile(){
                         ) : (
                             <p>{userState.description || 'No description available'}</p>
                         )}
-                        
-                        <button onClick={() => setEditingUserDesc(true)}>Edit description</button>
+                        {activeUser.username === userName ? <button onClick={() => setEditingUserDesc(true)}>Edit description</button> : <></>}
                     </>
                 ) : (
                     <p>User data is not available.</p>
