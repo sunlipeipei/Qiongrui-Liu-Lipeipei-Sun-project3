@@ -70,7 +70,6 @@ router.put('/:postId', async function (req, res) {
         return;
     }
     const username = jwtHelpers.decrypt(req.cookies.userToken).username; 
-    // const username = jwtHelpers.decrypt(req.cookies.userToken); 
     if (!username) {
         res.status(401).send('Unauthorized: Please log in');
         return;
@@ -99,7 +98,6 @@ router.put('/:postId', async function (req, res) {
 router.delete('/:postId', async function (req, res) {
     const postId = req.params.postId;
 
-    // const username = jwtHelpers.decrypt(req.cookies.userToken); 
     const username = jwtHelpers.decrypt(req.cookies.userToken).username; 
     if (!username) {
         res.status(401).send('Unauthorized: Please log in');

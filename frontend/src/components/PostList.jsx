@@ -66,7 +66,7 @@ export default function PostList() {
 
     async function updatePost(updatedPost) {
         try {
-            await axios.put(`/api/post/${updatedPost.id}`, updatedPost);
+            await axios.put(`/api/post/${updatedPost._id}`, updatedPost);
             getPosts();
             setEditingPostId(null);
         } catch (error) {
