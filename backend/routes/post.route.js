@@ -40,7 +40,7 @@ router.post('/', async function (req, res) {
         return;
     }
 
-    const username = jwtHelpers.decrypt(req.cookies.userToken); 
+    const username = jwtHelpers.decrypt(req.cookies.userToken).username; 
     if (!username) {
         res.status(401).send('Unauthorized: Please log in');
         return;
