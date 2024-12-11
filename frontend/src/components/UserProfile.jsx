@@ -15,6 +15,7 @@ export default function UserProfile(){
     const [errorMsgState, setErrorMsgState] = useState(null);
     const [editingUserDesc, setEditingUserDesc] = useState(false);
     const [userDescState, setUserDescState] = useState('')
+    const { user: activeUser } = useContext(AuthContext); // Logged-in user
 
     useEffect(() => {
         getUserData();
