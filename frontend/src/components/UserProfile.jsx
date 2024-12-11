@@ -34,25 +34,23 @@ export default function UserProfile(){
         }
     }
 
-    async function updateUserDescription(e){
+    async function updateUserDescription(e) {
         e.preventDefault();
         try {
-            const updatedDescription = {description : userDescState};
-            console.log(updateUserDescription)
-            await axios.put(
-                // `api/user/${userName}/description`,
-                `http://localhost:8000/api/user/${userName}/description`,
-                { description: userDescState },
-                { withCredentials: true }
+            const updatedDescription = { description: userDescState };
+            console.log("Updated Description:", updatedDescription);
+            const response = await axios.put(
+                `/api/user/${userName}/description`,
+                updatedDescription
             );
             console.log('API Response:', response.data);
+            setEditingUserDesc(false); 
             getUserData();
-            setEditingUserDesc(false);
         } catch (error) {
             console.error('Error updating description:', error.response?.data || error.message);
-            setErrorMsgState('Failed to update the post. Please try again.');
+            setErrorMsgState('Failed to update the description. Please try again.');
         }
-    };
+    }
 
     if (loadingState) {
         return <div>Loading posts...</div>
@@ -103,7 +101,7 @@ export default function UserProfile(){
                                 </button>
                             </form>
                         ) : (
-                            <p>{userState.description || 'No description available'}</p>
+                            <p className='description'>{userState.description || ' '}</p>
                         )}
                         {activeUser.username === userName ? <button onClick={() => setEditingUserDesc(true)}>Edit description</button> : <></>}
                     </>

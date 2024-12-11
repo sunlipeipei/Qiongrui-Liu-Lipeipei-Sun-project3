@@ -26,6 +26,10 @@
     color: rgb(100, 150, 150);
 }
 
+.description {
+    color: #484848;
+}
+
 .error-message{
     position: fixed;
     top: 50%;
