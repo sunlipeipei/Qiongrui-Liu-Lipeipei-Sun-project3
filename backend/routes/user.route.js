@@ -63,15 +63,19 @@ router.post('/logout', function(request, response) {
 })
 
 // Login Status
-router.get('/isLoggedIn', function(request, response) {
-    const username = jwtHelpers.decrypt(request.cookies.userToken);
-    if (!username) {
-        response.status(400).send('Not logged in');
-        return;
+router.get('/isLoggedIn', (req, res) => {
+    const token = req.cookies.userToken || req.headers.authorization?.split(' ')[1];
+    if (!token) {
+        return res.status(401).send('Not logged in');
     }
-    res.status(200).send({ username });
 
-})
+    try {
+        const decoded = jwtHelpers.decrypt(token);
+        res.status(200).send({ username: decoded.username, isAdmin: decoded.isAdmin });
+    } catch (error) {
+        res.status(401).send('Invalid token');
+    }
+});
 
 // Get
 // http://localhost:8000/api/user/:username
