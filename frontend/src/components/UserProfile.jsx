@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom';
 export default function UserProfile(){
     const {userName} = useParams();
     const [userState, setUserState] = useState(null)
-    // const {activeUser} = useContext(AuthContext);
     const [loadingState, setLoadingState] = useState(true);
     const [errorMsgState, setErrorMsgState] = useState(null);
 
