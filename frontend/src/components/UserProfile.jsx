@@ -75,6 +75,7 @@ export default function UserProfile(){
                 {/* Check if userState is defined before accessing its properties */}
                 {userState ? (
                     <>
+                        <h1 >{userState.username}</h1>
                         <small className="timeStamp">
                         Joined since {new Date(userState.timestamp).toLocaleDateString('en-US', {
                                         year: 'numeric',
@@ -82,8 +83,6 @@ export default function UserProfile(){
                                         day: 'numeric',
                                     })}
                         </small>
-                        <h1 >{userState.username}</h1>
-                        {/* <p>{userState.description || 'No description available'}</p> */}
                         {editingUserDesc ? (
                             <form onSubmit={updateUserDescription}>
                                 <textarea
