@@ -41,7 +41,7 @@ export default function PostList() {
     async function getPosts() {
         try {
             // Todo: Once everything is good to go, replace sample data with api call below
-            const response = await axios.get('http://localhost:8000/api/post'); // Fix endpoint if needed
+            const response = await axios.get('/api/post'); 
             setPostDetailState(response.data);
             // Simulating a successful API call with mocked data
             // setPostDetailState(postDetailStateTest);
@@ -55,7 +55,7 @@ export default function PostList() {
 
     async function deletePost(post_id) {
         try {
-            await axios.delete(`http://localhost:8000/api/post/${post_id}`);
+            await axios.delete(`/api/post/${post_id}`);
             console.log('Post with id: ',{post_id}, ' has been deleted');
             await getPosts(); // Fetch posts after deletion
         } catch (error) {
@@ -66,7 +66,7 @@ export default function PostList() {
 
     async function updatePost(updatedPost) {
         try {
-            await axios.put(`http://localhost:8000/api/post/${updatedPost.id}`, updatedPost);
+            await axios.put(`/api/post/${updatedPost.id}`, updatedPost);
             getPosts();
             setEditingPostId(null);
         } catch (error) {
@@ -100,7 +100,6 @@ export default function PostList() {
 
             {user && (
                 <div className="post">
-                    <h1>{user.username}</h1>
                     <PostForm onPostAdded={() => getPosts()} />
                 </div>
             )}

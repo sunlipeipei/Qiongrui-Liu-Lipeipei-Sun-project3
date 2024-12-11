@@ -4,7 +4,7 @@ const postModel = require('../db/post.model');
 const jwtHelpers = require('../helpers/jwt');
 
 // Get: Retrieve all posts (sorted by timestamp in descending order)
-// http://localhost:3000/api/post/
+// http://localhost:8000/api/post/
 router.get('/', async function (req, res) {
     try {
         const posts = await postModel.getAllPosts(); 
@@ -15,7 +15,7 @@ router.get('/', async function (req, res) {
 });
 
 // Get: Retrieve a specific post by its ID
-// http://localhost:3000/api/post/:postId
+// http://localhost:8000/api/post/:postId
 router.get('/:postId', async function (req, res) {
     const postId = req.params.postId; 
     try {
@@ -69,8 +69,8 @@ router.put('/:postId', async function (req, res) {
         res.status(400).send('Post content is required to update'); 
         return;
     }
-
-    const username = jwtHelpers.decrypt(req.cookies.userToken); 
+    const username = jwtHelpers.decrypt(req.cookies.userToken).username; 
+    // const username = jwtHelpers.decrypt(req.cookies.userToken); 
     if (!username) {
         res.status(401).send('Unauthorized: Please log in');
         return;
@@ -99,7 +99,8 @@ router.put('/:postId', async function (req, res) {
 router.delete('/:postId', async function (req, res) {
     const postId = req.params.postId;
 
-    const username = jwtHelpers.decrypt(req.cookies.userToken); 
+    // const username = jwtHelpers.decrypt(req.cookies.userToken); 
+    const username = jwtHelpers.decrypt(req.cookies.userToken).username; 
     if (!username) {
         res.status(401).send('Unauthorized: Please log in');
         return;
