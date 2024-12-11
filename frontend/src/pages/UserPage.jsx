@@ -5,9 +5,12 @@ import React from 'react';
 import { useState, useContext } from 'react';
 import PostList from '../components/PostList';
 import UserProfile from '../components/UserProfile';
+import { useParams } from 'react-router-dom';
 
 export default function UserPage(){
+
   const { activeUser, loading } = useContext(AuthContext);
+  const { userName } = useParams(); 
   // test
   console.log('User:', activeUser);
   console.log('Loading:', loading);
@@ -16,7 +19,7 @@ export default function UserPage(){
     <div>
       <UserProfile />
       {/* <h1>{activeUser.username}</h1> */}
-      <PostList />
+      <PostList username={userName} />
     </div>
   );
 };

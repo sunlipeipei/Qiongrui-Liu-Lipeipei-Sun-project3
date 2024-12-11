@@ -6,9 +6,10 @@ import '../styles/PostList.css';
 import axios from "axios";
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { Link } from "react-router-dom";
 import PostForm from './PostForm';
 
-export default function PostList() {
+export default function PostList({username}) {
     // Mocked post data
     // const postDetailStateTest = {
     //     "posts": [
@@ -28,11 +29,12 @@ export default function PostList() {
     // };
     // const userNameTest = "Peipei"
 
-    const {user} = useContext(AuthContext); // Current user
+    // const {user} = useContext(AuthContext); // Current active user
+    const { user: activeUser } = useContext(AuthContext); // Logged-in user
     const [postDetailState, setPostDetailState] = useState(null);
     const [errorMsgState, setErrorMsgState] = useState(null);
-    const [loadingStatus, setLoadingStatus] = useState(true);
-    const [editingPostStatus, setEditingPostStatus] = useState(null);
+    const [loadingState, setLoadingState] = useState(true);
+    const [editingPostState, setEditingPostState] = useState(null);
 
     useEffect(() => {
         getPosts();
@@ -40,16 +42,20 @@ export default function PostList() {
 
     async function getPosts() {
         try {
-            // Todo: Once everything is good to go, replace sample data with api call below
             const response = await axios.get('/api/post'); 
-            setPostDetailState(response.data);
+            // Filter posts only if `username` is provided
+            const allPosts = response.data;
+            const filteredPosts = username
+                ? allPosts.filter((post) => post.username === username)
+                : allPosts;
+            setPostDetailState(filteredPosts);
             // Simulating a successful API call with mocked data
             // setPostDetailState(postDetailStateTest);
         } catch (error) {
             setErrorMsgState('Failed to fetch posts. Please try again.');
             console.error(error);
         } finally {
-            setLoadingStatus(false);
+            setLoadingState(false);
         }
     }
 
@@ -68,7 +74,7 @@ export default function PostList() {
         try {
             await axios.put(`/api/post/${updatedPost._id}`, updatedPost);
             getPosts();
-            setEditingPostStatus(null);
+            setEditingPostState(null);
         } catch (error) {
             setErrorMsgState('Failed to update the post. Please try again.');
             console.error(error);
@@ -79,10 +85,9 @@ export default function PostList() {
         setErrorMsgState(null);
     }
     
-    if (loadingStatus) {
+    if (loadingState) {
         return <div>Loading posts...</div>
     }
-
 
     if (!postDetailState || postDetailState.length === 0) {
         return (
@@ -102,7 +107,12 @@ export default function PostList() {
                 </div>
             )}
 
-            {user && (
+            {/* {activeUser && (
+                <div className="post">
+                    <PostForm onPostAdded={() => getPosts()} />
+                </div>
+            )} */}
+            {(!username || (activeUser && activeUser.username === username)) && (
                 <div className="post">
                     <PostForm onPostAdded={() => getPosts()} />
                 </div>
@@ -110,11 +120,13 @@ export default function PostList() {
 
             {postDetailState.map((post) => (
                 <div key={post._id} className="post">
-                    <h3>{post.username}</h3>
+                    <Link to={`/user/${post.username}`} className="post-link">
+                        <h3>{post.username}</h3>
+                    </Link>
                     <small className="timeStamp">
                         {new Date(post.timestamp).toLocaleString()}
                     </small>
-                    {editingPostStatus === post._id ? (
+                    {editingPostState === post._id ? (
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
@@ -125,23 +137,15 @@ export default function PostList() {
                             <textarea name="content" defaultValue={post.content}></textarea>
                             <div>
                                 <button type="submit">Update</button>
-                                <button onClick={() => setEditingPostStatus(null)}>Cancel</button>
+                                <button onClick={() => setEditingPostState(null)}>Cancel</button>
                             </div>
                         </form>
                     ) : (
                         <p className="post-content">{post.content}</p>
                     )}
-                    {/* Show Edit and Delete buttons only if the logged-in user matches */}
-                    {/* {user.username === post.username && (
-                        <>
-                            <button onClick={() => setEditingPostId(post.id)}>Edit</button>
-                            <button onClick={() => deletePost(post.id)}>Delete</button>
-                            {editingPostStatus === post.id ? <button>Update</button> : <></>}
-                        </>
-                    )} */}
-                    <button onClick={() => setEditingPostStatus(post._id)}>Edit</button>
+                    <button onClick={() => setEditingPostState(post._id)}>Edit</button>
                     <button onClick={()=>deletePost(post._id)}>Delete</button> 
-                    {editingPostStatus === post.id ? 
+                    {editingPostState === post.id ? 
                         <button>Update</button> :
                         ''
                     }
