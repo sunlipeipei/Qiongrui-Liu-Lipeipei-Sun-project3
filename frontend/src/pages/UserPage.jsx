@@ -1,9 +1,6 @@
 /**
  * UserPage displaying all user posts and user information
  */
-
-import '../styles/UserPage.css';
-
 import React from 'react';
 import PostList from '../components/PostList';
 import UserProfile from '../components/UserProfile';
