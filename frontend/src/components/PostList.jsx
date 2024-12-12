@@ -128,7 +128,10 @@ export default function PostList({username}) {
                             </div>
                         </form>
                     ) : (
+                        <div>
                         <p className="post-content">{post.content}</p>
+                        {post.image && <img src={`http://localhost:8000${post.image}`} style={{ maxWidth: "100%" }} />}
+                        </div>
                     )}
                     <button onClick={() => setEditingPostState(post._id)}>Edit</button>
                     <button onClick={()=>deletePost(post._id)}>Delete</button> 

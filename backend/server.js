@@ -65,6 +65,8 @@ db.on('error', console.error.bind(console, 'Error connecting to MongoDB:'));
 const frontend_dir = path.join(__dirname, '..', 'frontend', 'dist'); 
 app.use(express.static(frontend_dir));
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Redirect all unmatched routes to the frontend
 app.get('*', function (req, res) {
     console.log("received request");

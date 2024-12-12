@@ -9,32 +9,42 @@ import { AuthContext } from '../context/AuthContext';
 
 export default function PostForm({ onPostAdded }) {
     const [contentState, setContentState] = useState(''); 
+    const [imageState, setImageState] = useState(null)
     const [errorMsgState, setErrorMsgState] = useState(null); 
-    const { user } = useContext(AuthContext);
 
     async function addNewPost(e) {
-        e.preventDefault(); 
-        if (!contentState.trim()) {
-            setErrorMsgState("Post content cannot be empty.");
+        e.preventDefault();
+    
+        if (!contentState.trim() && !imageState) {
+            setErrorMsgState("Post needs to include either text or an image.");
             return;
         }
+    
+        const postFormData = new FormData();
+        postFormData.append("content", contentState || ""); 
+        if (imageState) {
+            postFormData.append("image", imageState);
+        }
+    
         try {
-            const response = await axios.post(`/api/post`, { content: contentState }); // API call
+            const response = await axios.post(`/api/post`, postFormData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
             console.log('New post created:', response.data);
-
-            // Callback to for PostList to update post list
             if (onPostAdded) {
                 onPostAdded(response.data);
             }
-
-            // Reset the input and error message
             setContentState('');
+            setImageState(null);
             setErrorMsgState(null);
         } catch (error) {
-            setErrorMsgState('Failed to add the post. Please try again.');
+            setErrorMsgState(error.response?.data || 'Failed to add the post. Please try again.');
             console.error(error);
         }
     }
+
 
     function closeErrorMsg(){
         setErrorMsgState(null);
@@ -56,6 +66,11 @@ export default function PostForm({ onPostAdded }) {
                         value={contentState}
                         onChange={(e) => setContentState(e.target.value)}
                         className="post-textarea"
+                    />
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setImageState(e.target.files[0])}
                     />
                     <button type="submit" className="post-button">Post</button>
                 </form>

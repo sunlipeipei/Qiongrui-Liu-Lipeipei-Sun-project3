@@ -63,3 +63,8 @@ button:hover {
 button:active {
     background-color: #b3b3b3; 
 }
+
+img{
+    max-height: 300px;
+    max-width: 300px;
+}

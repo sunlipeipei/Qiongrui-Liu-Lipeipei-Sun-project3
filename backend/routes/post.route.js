@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const postModel = require('../db/post.model');
 const jwtHelpers = require('../helpers/jwt');
+const multer = require("multer");
+const path = require("path");
+
+// Configure multer to store files in the "uploads" directory
+const upload = multer({
+    dest: path.join(__dirname, '../uploads/'), // Adjust the path to match your project structure
+});
 
 // Get: Retrieve all posts (sorted by timestamp in descending order)
 // http://localhost:8000/api/post/
@@ -31,32 +38,33 @@ router.get('/:postId', async function (req, res) {
 });
 
 // POST
-router.post('/', async function (req, res) {
-    const { content } = req.body; 
+
+router.post('/', upload.single("image"), async function (req, res) {
+    const { content } = req.body;
 
     // Validate required fields
-    if (!content) {
-        res.status(400).send('Post content is missing'); 
-        return;
-    }
-
     const username = jwtHelpers.decrypt(req.cookies.userToken).username; 
     if (!username) {
         res.status(401).send('Unauthorized: Please log in');
         return;
     }
 
+    if (!content && !req.file) {
+        return res.status(400).send('Post must include either text or an image.');
+    }
+
     const newPost = {
-        username, 
-        content,
-        timestamp: new Date(), 
+        username,
+        content: content || "", 
+        image: req.file ? `/uploads/${req.file.filename}` : null,
+        timestamp: new Date(),
     };
 
     try {
-        const savedPost = await postModel.insertPost(newPost); 
-        res.status(201).send(savedPost); 
+        const savedPost = await postModel.insertPost(newPost);
+        res.status(201).send(savedPost);
     } catch (error) {
-        res.status(500).send('Error creating post: ' + error.message); 
+        res.status(500).send('Error creating post: ' + error.message);
     }
 });
 
