@@ -137,7 +137,7 @@ export default function PostList({username}) {
                     ) : (
                         <p className="post-content">{post.content}</p>
                     )}
-                    {activeUser && <div><button onClick={() => setEditingPostState(post._id)}>Edit</button>
+                    {((activeUser && !username) || (activeUser && activeUser.username === username)) && <div><button onClick={() => setEditingPostState(post._id)}>Edit</button>
                     <button onClick={()=>deletePost(post._id, post.username)}>Delete</button></div>}
 
                     {editingPostState === post.id ? 

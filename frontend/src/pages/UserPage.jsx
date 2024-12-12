@@ -11,9 +11,6 @@ export default function UserPage(){
 
   const { activeUser, loading } = useContext(AuthContext);
   const { userName } = useParams(); 
-  // test
-  console.log('User:', activeUser);
-  console.log('Loading:', loading);
 
   return (
     <div>
