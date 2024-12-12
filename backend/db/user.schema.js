@@ -6,7 +6,7 @@ exports.UserSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    minlength: 3,
+    minlength: 1,
     maxlength: 30,
   },
   password: {
@@ -30,7 +30,6 @@ exports.UserSchema = new Schema({
 
 // Extra Credit: Password Encryption
 exports.UserSchema.pre('save', async function (next) {
-  // skip hashing if password isn't modified
   if (!this.isModified('password')) {
     return next()
   }; 
