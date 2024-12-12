@@ -23,7 +23,8 @@ router.post('/signup', async function (req, res) {
             // duplicate key error (username already exists)
             res.status(400).send('Username is already existed');
         } else {
-            res.status(500).send('Error registering user: ' + error.message);
+            console.error('Error registering user:', error);
+            res.status(500).send('Unable to Sign Up. Please try again.');
         }    }
 });
 
