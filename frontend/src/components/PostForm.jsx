@@ -1,5 +1,5 @@
 /**
- * Form for creating or editing posts
+ * Form for creating posts
  */
 
 import { useContext, useState } from "react";
