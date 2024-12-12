@@ -46,8 +46,10 @@ const NavBar = () => {
           <>
             <span>
                 <span className="navbar-welcome">Welcome,</span>
-                <strong className="navbar-username">{user.username}</strong>
-            </span>
+                  <Link to={`/user/${user.username}`} className="navbar-username-link">
+                    <strong className="navbar-username">{user.username}</strong>
+                  </Link>
+                </span>
             <button className="navbar-logout" onClick={handleLogout}>Logout</button>
           </>
         ) : (
