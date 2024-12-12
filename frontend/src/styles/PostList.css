@@ -41,6 +41,7 @@
     border-radius: 3px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
     font-weight: bold;
+    max-width: 80%;
 }
 
 body {
@@ -66,16 +67,18 @@ button:active {
 
 @media (max-width: 768px) {
     .error-message {
-        max-width: 80%;
-        padding: 10px 15px; 
-        font-size: 0.9rem; 
+        position: fixed;
+        top: 40%;
+        left: 35%; 
+        max-width: 70%;
     }
 }
 
 @media (max-width: 480px) {
     .error-message {
-        max-width: 80%;
-        padding: 10px 15px; 
-        font-size: 0.9rem; 
+        position: fixed;
+        top: 35%;
+        left: 15%; 
+        max-width: 70%;
     }
 }

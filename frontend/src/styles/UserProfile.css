@@ -66,3 +66,21 @@ button:hover {
 button:active {
     background-color: #b3b3b3; 
 }
+
+@media (max-width: 768px) {
+    .error-message {
+        position: fixed;
+        top: 40%;
+        left: 35%; 
+        max-width: 70%;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-message {
+        position: fixed;
+        top: 35%;
+        left: 15%; 
+        max-width: 70%;
+    }
+}
