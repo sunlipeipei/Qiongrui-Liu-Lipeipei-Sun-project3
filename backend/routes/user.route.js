@@ -165,17 +165,17 @@ router.delete('/:username', authorizeDeletion, async function (req, res) {
 });
 
 // Extra Credit: Search for Users
-// http://localhost:8000/api/user/search?q=ter
-router.get('/search', async function (req, res) {
+// http://localhost:8000/api/user/:inputPartialUserName
+router.get('/search/:inputPartialUserName', async function (req, res) {
     console.log('Search route reached'); // debug
-    const searchQuery = req.query.q; 
-    console.log('Search route hit with query:', searchQuery); // debug
-    if (!searchQuery) {
+    const inputPartialUserName = req.params.inputPartialUserName;
+    console.log('Search route hit with search input:', inputPartialUserName); // debug
+    if (!inputPartialUserName) {
         return res.status(400).send('Search query is required');
     }
 
     try {
-        const users = await userModel.searchUsersByName(searchQuery);
+        const users = await userModel.searchUsersByName(inputPartialUserName);
         console.log('Found users:', users); // debug
         res.status(200).send(users);
     } catch (error) {

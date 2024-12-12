@@ -17,19 +17,7 @@ const HomePage = () => {
 
     return (
         <div className="homepage">
-            {/* <h1>Welcome to the Homepage.</h1>
-            {user ? (
-                <h2>Welcome back, {user.username}!</h2>
-            ) : (
-                <h2>Hello, Visitor!</h2>
-            )}
-
-            <p>
-                {user
-                    ? 'You can create, edit, and delete posts.'
-                    : 'Log in to interact with posts. You can still view all posts below.'}
-            </p> */}
-            {/* {user ? <div className='user'><h1>{user.username}</h1></div>: <></>} */}
+            {/* Render the PostList component */}
             <PostList />
         </div>
     );

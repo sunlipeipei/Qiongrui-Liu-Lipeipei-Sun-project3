@@ -12,7 +12,8 @@ const SearchResultPage = () => {
   useEffect(() => {
     setError(null); // Reset error on query change
     if (query) {
-      axios.get(`/api/user/search?q=${query}`, {
+      axios
+        .get(`/api/user/search/${query}`, {
             withCredentials: true, })
         .then(response => setResults(response.data))
         .catch(error => {
