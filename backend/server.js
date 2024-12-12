@@ -36,11 +36,11 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', function(request, response) {
-    const responseString = helper.returnRandomString();
+// app.get('/', function(request, response) {
+//     const responseString = helper.returnRandomString();
     
-    response.send('Hello from the express server. It says: ' + responseString);
-})
+//     response.send('Hello from the express server. It says: ' + responseString);
+// })
 
 // app.post('/', function(request, response) {
 
