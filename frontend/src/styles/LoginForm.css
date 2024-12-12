@@ -56,10 +56,83 @@
     background-color: #0056b3;
 }
 
-
 .error-message {
     color: #ff4d4d;
-    font-size: 14px;
-    margin-bottom: 15px;
+    font-size: 8px;
     text-align: center;
+    background-color: #fff3f3; 
+    padding: 10px;
+    border: 1px solid #ffcccc; 
+    border-radius: 4px; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+    max-width: 70%;
+    font-weight: normal;
+}
+
+@media (max-width: 768px) {
+    .login-form-container {
+        padding: 15px;
+        height: auto; 
+        margin-top: 10px;
+    }
+
+    .login-form {
+        padding: 15px; 
+        max-width: 90%; 
+    }
+
+    .login-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .error-message {
+        font-size: 12px; 
+        padding: 8px; 
+        margin-bottom: 10px; 
+        position: fixed;
+        top: 40%;
+        left: 35%; 
+        max-width: 70%;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-form-container {
+        padding: 10px;
+        height: auto; 
+        margin-top: 8px;
+    }
+
+    .login-form {
+        padding: 10px; 
+        max-width: 100%; 
+    }
+
+    .login-form h2 {
+        font-size: 1.5rem; 
+    }
+
+    .form-group input {
+        font-size: 13px; 
+        padding: 8px; 
+    }
+
+    .login-button {
+        font-size: 14px; 
+        padding: 8px; 
+    }
+
+    .error-message {
+        font-size: 10px; 
+        padding: 6px; 
+        margin-bottom: 8px; 
+        position: fixed;
+        top: 30%;
+        left: 20%; 
+        max-width: 70%;
+    }
 }

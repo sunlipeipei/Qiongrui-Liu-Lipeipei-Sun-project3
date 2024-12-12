@@ -2,7 +2,6 @@
  * Homepage displaying all posts
  */
 
-import '../styles/HomePage.css';
 import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import PostList from '../components/PostList';

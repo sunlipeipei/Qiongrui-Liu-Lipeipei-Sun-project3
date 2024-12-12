@@ -1,6 +1,11 @@
 .search-results-page {
     padding: 20px;
 }
+
+.search-results-page h1 {
+    font-size: 2rem; 
+    color: #333; 
+}
   
 .results-list {
     list-style: none;
@@ -22,4 +27,46 @@
     color: red;
     font-weight: bold;
 }
+
+@media (max-width: 768px) {
+    .search-results-page {
+        padding: 10px;
+    }
+
+    .search-results-page h1 {
+        font-size: 1.5rem; 
+    }
   
+    .results-list {
+        font-size: 1rem; 
+    }
+
+    .result-link {
+        font-size: 1rem;
+        word-wrap: break-word; /* ensure long usernames wrap */
+    }
+}
+
+@media (max-width: 480px) {
+    .search-results-page {
+        padding: 5px;
+    }
+
+    .search-results-page h1 {
+        font-size: 1.2rem; 
+    }
+
+    .results-list {
+        font-size: 0.9rem; 
+
+    .result-link {
+        font-size: 0.9rem;
+    }
+
+    .error-message {
+        font-size: 1rem;
+        text-align: center;
+        padding: 5px; 
+    }
+}
+}
