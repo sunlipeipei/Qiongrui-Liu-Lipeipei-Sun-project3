@@ -26,7 +26,7 @@ async function findPostById(postId) {
 
 // Update a post's content by its ID
 async function updatePost(postId, content) {
-    return PostModel.findByIdAndUpdate(postId, { content }, { new: true }).exec();
+    return PostModel.findByIdAndUpdate(postId, { content, timestamp: Date.now() }, { new: true }).exec();
 }
 
 async function deletePost(postId) {
