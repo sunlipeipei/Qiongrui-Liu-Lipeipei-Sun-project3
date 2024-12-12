@@ -53,10 +53,10 @@ export default function PostList({username}) {
     async function updatePost(updatedPost) {
         try {
             const token = localStorage.getItem('userToken');
-        if (!token) {
-            setErrorMsgState('You must be logged in to update a post.');
-            return;
-        }
+            if (!token) {
+                setErrorMsgState('You must be logged in to update a post.');
+                return;
+            }
         
             await axios.put(`/api/post/${updatedPost._id}`, updatedPost);
             getPosts();
