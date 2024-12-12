@@ -39,14 +39,17 @@ export default function PostList({username}) {
         }
     }
 
-    async function deletePost(post_id) {
+    async function deletePost(post_id, username) {
         try {
             const token = localStorage.getItem('userToken');
             if (!token) {
                 setErrorMsgState('You must be logged in to delete post.');
                 return;
             }
-
+            if (activeUser.username != username){
+                setErrorMsgState("You don't have permission to delete this post.");
+                return;
+            }
             await axios.delete(`/api/post/${post_id}`);
             console.log('Post with id: ',{post_id}, ' has been deleted');
             await getPosts(); // Fetch posts after deletion
@@ -63,7 +66,11 @@ export default function PostList({username}) {
                 setErrorMsgState('You must be logged in to update a post.');
                 return;
             }
-        
+            if (activeUser.username != updatedPost.username){
+                setErrorMsgState("You don't have permission to edit this post.");
+                setEditingPostState(null);
+                return;
+            }
             await axios.put(`/api/post/${updatedPost._id}`, updatedPost);
             getPosts();
             setEditingPostState(null);
@@ -130,8 +137,9 @@ export default function PostList({username}) {
                     ) : (
                         <p className="post-content">{post.content}</p>
                     )}
-                    <button onClick={() => setEditingPostState(post._id)}>Edit</button>
-                    <button onClick={()=>deletePost(post._id)}>Delete</button> 
+                    {activeUser && <div><button onClick={() => setEditingPostState(post._id)}>Edit</button>
+                    <button onClick={()=>deletePost(post._id, post.username)}>Delete</button></div>}
+
                     {editingPostState === post.id ? 
                         <button>Update</button> :
                         ''
