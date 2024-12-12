@@ -53,7 +53,7 @@ export default function UserProfile(){
     }
 
     if (loadingState) {
-        return <div>Loading posts...</div>
+        return <div>Loading user information...</div>
     }
 
     function closeErrorMsg(){
