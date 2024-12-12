@@ -3,7 +3,7 @@
  */
 
 import { useContext, useState } from "react";
-import axios from "axios"; // Import axios
+import axios from "axios"; 
 import '../styles/PostForm.css';
 import { AuthContext } from '../context/AuthContext';
 
@@ -19,15 +19,15 @@ export default function PostForm({ onPostAdded }) {
             return;
         }
         try {
-            const response = await axios.post(`/api/post`, { content: contentState }); // API call
+            const response = await axios.post(`/api/post`, { content: contentState }); 
             console.log('New post created:', response.data);
 
-            // Callback to for PostList to update post list
+            // callback for PostList to update post list
             if (onPostAdded) {
                 onPostAdded(response.data);
             }
 
-            // Reset the input and error message
+            // reset the input and error message
             setContentState('');
             setErrorMsgState(null);
         } catch (error) {

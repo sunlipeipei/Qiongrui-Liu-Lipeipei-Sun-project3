@@ -1,19 +1,18 @@
 import React, { createContext, useState, useEffect } from 'react';
-// import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null); // Store user information
-    const [loading, setLoading] = useState(true); // For async operations like token verification
+    const [user, setUser] = useState(null); // store user information
+    const [loading, setLoading] = useState(true); // for async operations like token verification
 
     useEffect(() => {
       // check if the user is logged in
       const checkLoginStatus = async () => {
           try {
               const response = await axios.get('/api/user/isLoggedIn', {
-                  withCredentials: true, // include cookies in the request
+                  withCredentials: true, 
               });
               setUser({
                   username: response.data.username,
@@ -36,24 +35,17 @@ const AuthProvider = ({ children }) => {
       setUser(userInfo);
     };
 
-    // // Logout function
-    // const logout = () => {
-    //   localStorage.removeItem('userToken');
-    //   setUser(null);
-    // };
-
+    // Logout function
     const logout = async () => {
       try {
           await axios.post('/api/user/logout', {}, { withCredentials: true }); 
       } catch (error) {
           console.error('Error during logout:', error);
       } finally {
-          localStorage.removeItem('userToken'); // Clear token on the client side
-          setUser(null); // Reset user state
+          localStorage.removeItem('userToken'); // clear token on the client side
+          setUser(null); // reset user state
       }
   };
-
-
 
     return (
       <AuthContext.Provider value={{ user, login, logout, loading }}>

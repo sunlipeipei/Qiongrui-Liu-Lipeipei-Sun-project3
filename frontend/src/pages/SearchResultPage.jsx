@@ -10,7 +10,7 @@ const SearchResultPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setError(null); // Reset error on query change
+    setError(null); // reset errorMessage 
     if (query) {
       axios
         .get(`/api/user/search/${query}`, {

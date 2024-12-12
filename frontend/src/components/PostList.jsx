@@ -11,7 +11,7 @@ import PostForm from './PostForm';
 
 export default function PostList({username}) {
 
-    const { user: activeUser } = useContext(AuthContext); // Logged-in user
+    const { user: activeUser } = useContext(AuthContext); // logged-in user
     const [postDetailState, setPostDetailState] = useState(null);
     const [errorMsgState, setErrorMsgState] = useState(null);
     const [loadingState, setLoadingState] = useState(true);

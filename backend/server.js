@@ -36,18 +36,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.get('/', function(request, response) {
-//     const responseString = helper.returnRandomString();
-    
-//     response.send('Hello from the express server. It says: ' + responseString);
-// })
-
-// app.post('/', function(request, response) {
-
-//     response.send("This response is preventing the later API");
-
-// })
-
 app.post('/', function(request, response) {
 
     response.send('Hello from the POST API in the Express server');

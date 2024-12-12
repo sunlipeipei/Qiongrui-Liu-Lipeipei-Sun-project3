@@ -18,7 +18,6 @@ export default function UserPage(){
   return (
     <div>
       <UserProfile />
-      {/* <h1>{activeUser.username}</h1> */}
       <PostList username={userName} />
     </div>
   );

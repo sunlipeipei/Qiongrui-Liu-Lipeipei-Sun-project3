@@ -58,7 +58,6 @@ router.post('/login', async function (req, res) {
 
 // Log out
 router.post('/logout', function(req, res) {
-    // response.clearCookie('userToken'); // doesn't delete the cookie, but expires it immediately
     res.clearCookie('userToken', { 
         httpOnly: true, 
         secure: process.env.NODE_ENV === 'production', 
