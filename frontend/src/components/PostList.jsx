@@ -41,6 +41,12 @@ export default function PostList({username}) {
 
     async function deletePost(post_id) {
         try {
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                setErrorMsgState('You must be logged in to delete post.');
+                return;
+            }
+
             await axios.delete(`/api/post/${post_id}`);
             console.log('Post with id: ',{post_id}, ' has been deleted');
             await getPosts(); // Fetch posts after deletion
