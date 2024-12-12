@@ -8,6 +8,7 @@ export default function Post({ post, activeUser, onEdit, onDelete, onUpdate }) {
     const handleUpdate = (e) => {
         e.preventDefault();
         const updatedContent = e.target.elements.content.value;
+        console.log(updatedContent)
         onUpdate({ ...post, content: updatedContent });
         setIsEditing(false);
     };
@@ -15,10 +16,11 @@ export default function Post({ post, activeUser, onEdit, onDelete, onUpdate }) {
     const authorized = activeUser && (activeUser.username === post.username);
 
     return (
-        <Link to={`/user/${post.username}`} className="post">
-            <div >
-                <h3>{post.username}</h3>
 
+            <div className="post">
+                <Link to={`/user/${post.username}`} className="post-link">
+                <h3>{post.username}</h3>
+                </Link>
                 <small className="timeStamp">{new Date(post.timestamp).toLocaleString()}</small>
                 
                 {isEditing ? (
@@ -30,7 +32,9 @@ export default function Post({ post, activeUser, onEdit, onDelete, onUpdate }) {
                         </div>
                     </form>
                 ) : (
+                    <Link to={`/user/${post.username}`} className="content-link">
                     <p >{post.content}</p>
+                    </Link>
                 )}
 
                 {authorized && (
@@ -40,6 +44,5 @@ export default function Post({ post, activeUser, onEdit, onDelete, onUpdate }) {
                     </div>
                 )}
             </div>
-        </Link>
     );
 }
