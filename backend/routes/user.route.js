@@ -17,13 +17,12 @@ router.post('/signup', async function (req, res) {
     try {
         // create a new user
         const newUser = await userModel.createUser({ username, password });
-        res.status(201).send({ message: 'User registered successfully', user: newUser });
+        res.status(201).send({ message: 'User registered successfully!', user: newUser });
     } catch (error) {
         if (error.code === 11000) {
             // duplicate key error (username already exists)
-            res.status(400).send('Username is already existed');
+            res.status(400).send('Username is already existed.');
         } else {
-            console.error('Error registering user:', error);
             res.status(500).send('Unable to Sign Up. Please try again.');
         }    }
 });
