@@ -1,3 +1,7 @@
+/**
+ * Login page
+ */
+
 import '../styles/LoginPage.css';
 import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';

@@ -73,6 +73,7 @@ export default function PostList({ username }) {
                     <button onClick={closeErrorMsg}>Close</button>
                 </div>
             )}
+            {/* active user on home page or active user on their user page */}
             {((activeUser && !username) || (activeUser && activeUser.username === username)) && (
                 <div className="post" ><PostForm onPostAdded={getPosts} /></div>
             )}

@@ -1,8 +1,12 @@
+/**
+ * Post component
+ * Displays individual post and allows for editing post
+ */
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import '../styles/PostList.css';
 
-export default function Post({ post, activeUser, onEdit, onDelete, onUpdate }) {
+export default function Post({ post, activeUser, onDelete, onUpdate }) {
     const [isEditing, setIsEditing] = useState(false);
 
     const handleUpdate = (e) => {
