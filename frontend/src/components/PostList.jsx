@@ -51,6 +51,11 @@ export default function PostList({username}) {
     }
 
     async function updatePost(updatedPost) {
+
+        const token = req.cookies.userToken;
+        if (!token) {
+            return res.status(401).json({ message: 'You must be logged in to update a post.' });
+        }
         try {
             await axios.put(`/api/post/${updatedPost._id}`, updatedPost);
             getPosts();
