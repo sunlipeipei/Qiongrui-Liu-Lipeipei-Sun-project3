@@ -42,7 +42,6 @@ export default function PostForm({ onPostAdded }) {
 
     return (
         <div className="post-form">
-            {/* <h1>{user.username}</h1> */}
             {errorMsgState && (
                 <div className="error-message">
                     <p>{errorMsgState}</p>

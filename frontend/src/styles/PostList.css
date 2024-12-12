@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none;
 }
 
 .post{
@@ -11,6 +12,8 @@
     max-width: 700px;
     min-width: 300px;
     padding: 20px;
+    text-decoration: none;
+    color: #474747;
 }
 
 .post-link{
@@ -24,6 +27,17 @@
     color: #2c6a94; 
     transform: scale(1.1);
     text-decoration: underline;
+}
+
+.content-link{
+    color: #333333; 
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.content-link:hover{
+    color: #2c6a94; 
+    transform: scale(1.1);
 }
 
 .timeStamp{

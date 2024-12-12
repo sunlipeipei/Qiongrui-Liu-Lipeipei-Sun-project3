@@ -1,21 +1,18 @@
 /**
  * Component for displacing posts
  */
-
 import '../styles/PostList.css';
 import axios from "axios";
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { Link } from "react-router-dom";
 import PostForm from './PostForm';
+import Post from './Post';
 
-export default function PostList({username}) {
-
-    const { user: activeUser } = useContext(AuthContext); // logged-in user
-    const [postDetailState, setPostDetailState] = useState(null);
+export default function PostList({ username }) {
+    const { user: activeUser } = useContext(AuthContext);
+    const [postDetailState, setPostDetailState] = useState([]);
     const [errorMsgState, setErrorMsgState] = useState(null);
     const [loadingState, setLoadingState] = useState(true);
-    const [editingPostState, setEditingPostState] = useState(null);
 
     useEffect(() => {
         getPosts();
@@ -23,8 +20,7 @@ export default function PostList({username}) {
 
     async function getPosts() {
         try {
-            const response = await axios.get('/api/post'); 
-            // Filter posts only if `username` is provided
+            const response = await axios.get('/api/post');
             const allPosts = response.data;
             const filteredPosts = username
                 ? allPosts.filter((post) => post.username === username)
@@ -39,20 +35,10 @@ export default function PostList({username}) {
         }
     }
 
-    async function deletePost(post_id, username) {
+    async function deletePost(postId) {
         try {
-            const token = localStorage.getItem('userToken');
-            if (!token) {
-                setErrorMsgState('You must be logged in to delete post.');
-                return;
-            }
-            if (activeUser.username != username){
-                setErrorMsgState("You don't have permission to delete this post.");
-                return;
-            }
-            await axios.delete(`/api/post/${post_id}`);
-            console.log('Post with id: ',{post_id}, ' has been deleted');
-            await getPosts(); // Fetch posts after deletion
+            await axios.delete(`/api/post/${postId}`);
+            getPosts();
         } catch (error) {
             setErrorMsgState('Failed to delete the post. Please try again.');
             console.error(error);
@@ -61,92 +47,45 @@ export default function PostList({username}) {
 
     async function updatePost(updatedPost) {
         try {
-            const token = localStorage.getItem('userToken');
-            if (!token) {
-                setErrorMsgState('You must be logged in to update a post.');
-                return;
-            }
-            if (activeUser.username != updatedPost.username){
-                setErrorMsgState("You don't have permission to edit this post.");
-                setEditingPostState(null);
-                return;
-            }
             await axios.put(`/api/post/${updatedPost._id}`, updatedPost);
             getPosts();
-            setEditingPostState(null);
         } catch (error) {
             setErrorMsgState('Failed to update the post. Please try again.');
             console.error(error);
         }
-    };
+    }
 
-    function closeErrorMsg(){
+    function closeErrorMsg() {
         setErrorMsgState(null);
     }
-    
-    if (loadingState) {
-        return <div>Loading posts...</div>
-    }
+
+    if (loadingState) return <div>Loading posts...</div>;
 
     if (!postDetailState || postDetailState.length === 0) {
-        return (
-            <div className='post-list'>
-                <div className='post'>Sorry, there is no posts available.</div>
-            </div>
-        );
+        return <div className="post-list"><div className="post">No posts available.</div></div>;
     }
 
     return (
         <div className="post-list">
-
             {errorMsgState && (
                 <div className="error-message">
                     <p>{errorMsgState}</p>
                     <button onClick={closeErrorMsg}>Close</button>
                 </div>
             )}
-
-            {((activeUser &&!username) || (activeUser && activeUser.username === username)) && (
-                <div className="post">
-                    <PostForm onPostAdded={() => getPosts()} />
-                </div>
+            {((activeUser && !username) || (activeUser && activeUser.username === username)) && (
+                <div className="post" ><PostForm onPostAdded={getPosts} /></div>
             )}
-
             {postDetailState.map((post) => (
-                <div key={post._id} className="post">
-                    <Link to={`/user/${post.username}`} className="post-link">
-                        <h3>{post.username}</h3>
-                    </Link>
-                    <small className="timeStamp">
-                        {new Date(post.timestamp).toLocaleString()}
-                    </small>
-                    {editingPostState === post._id ? (
-                        <form
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                                const updatedContent = e.target.elements.content.value;
-                                updatePost({ ...post, content: updatedContent });
-                            }}
-                        >
-                            <textarea name="content" defaultValue={post.content}></textarea>
-                            <div>
-                                <button type="submit">Update</button>
-                                <button onClick={() => setEditingPostState(null)}>Cancel</button>
-                            </div>
-                        </form>
-                    ) : (
-                        <p className="post-content">{post.content}</p>
-                    )}
-                    {((activeUser && !username) || (activeUser && activeUser.username === username)) && <div><button onClick={() => setEditingPostState(post._id)}>Edit</button>
-                    <button onClick={()=>deletePost(post._id, post.username)}>Delete</button></div>}
-
-                    {editingPostState === post.id ? 
-                        <button>Update</button> :
-                        ''
-                    }
-                </div>
+                <Post
+                    key={post._id}
+                    post={post}
+                    activeUser={activeUser}
+                    onEdit={() => {}}
+                    onDelete={deletePost}
+                    onUpdate={updatePost}
+                />
             ))}
         </div>
-        
     );
 }
