@@ -24,7 +24,7 @@ export default function UserProfile(){
         try {
             setLoadingState(true)
             const response = await axios.get(`/api/user/${userName}`);
-            // console.log('userName from URL:', userName);
+            console.log('userName from URL:', userName);
             console.log(response.data)
             setUserState(response.data);
         } catch (err) {
@@ -103,7 +103,7 @@ export default function UserProfile(){
                         ) : (
                             <p className='description'>{userState.description || ' '}</p>
                         )}
-                        {activeUser.username === userName ? <button onClick={() => setEditingUserDesc(true)}>Edit description</button> : <></>}
+                        {activeUser && activeUser.username === userName ? <button onClick={() => setEditingUserDesc(true)}>Edit description</button> : <></>}
                     </>
                 ) : (
                     <p>User data is not available.</p>
