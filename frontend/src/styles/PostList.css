@@ -63,3 +63,19 @@ button:hover {
 button:active {
     background-color: #b3b3b3; 
 }
+
+@media (max-width: 768px) {
+    .error-message {
+        max-width: 80%;
+        padding: 10px 15px; 
+        font-size: 0.9rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    .error-message {
+        max-width: 80%;
+        padding: 10px 15px; 
+        font-size: 0.9rem; 
+    }
+}
