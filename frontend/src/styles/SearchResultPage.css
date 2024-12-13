@@ -78,6 +78,7 @@
 
     .results-list {
         font-size: 0.9rem; 
+    }
 
     .result-link {
         font-size: 0.9rem;
@@ -88,5 +89,4 @@
         text-align: center;
         padding: 5px; 
     }
-}
 }

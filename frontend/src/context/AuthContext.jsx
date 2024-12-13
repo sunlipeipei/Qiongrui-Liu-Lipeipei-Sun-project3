@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null); // store user information
-    const [loading, setLoading] = useState(true); // for async operations like token verification
+    const [loading, setLoading] = useState(true); // for async operation - token verification
 
     useEffect(() => {
       // check if the user is logged in
@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
       } catch (error) {
           console.error('Error during logout:', error);
       } finally {
-          localStorage.removeItem('userToken'); // clear token on the client side
+          localStorage.removeItem('userToken'); 
           setUser(null); // reset user state
       }
   };
