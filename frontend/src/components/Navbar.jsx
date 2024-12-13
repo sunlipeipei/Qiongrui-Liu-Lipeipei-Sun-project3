@@ -15,8 +15,8 @@ const NavBar = () => {
 
   const handleLogout = () => {
     logout();
-    // redirect to login page after logging out
-    navigate('/login');
+    // redirect to home page after logging out
+    navigate('/');
   };
 
   const handleSearchSubmit = (e) => {
