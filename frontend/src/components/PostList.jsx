@@ -61,10 +61,6 @@ export default function PostList({ username }) {
 
     if (loadingState) return <div>Loading posts...</div>;
 
-    if (!postDetailState || postDetailState.length === 0) {
-        return <div className="post-list"><div className="post">No posts available.</div></div>;
-    }
-
     return (
         <div className="post-list">
             {errorMsgState && (
@@ -77,16 +73,20 @@ export default function PostList({ username }) {
             {((activeUser && !username) || (activeUser && activeUser.username === username)) && (
                 <div className="post" ><PostForm onPostAdded={getPosts} /></div>
             )}
-            {postDetailState.map((post) => (
-                <Post
-                    key={post._id}
-                    post={post}
-                    activeUser={activeUser}
-                    onEdit={() => {}}
-                    onDelete={deletePost}
-                    onUpdate={updatePost}
-                />
-            ))}
+            {postDetailState && postDetailState.length > 0 ? (
+                postDetailState.map((post) => (
+                    <Post
+                        key={post._id}
+                        post={post}
+                        activeUser={activeUser}
+                        onEdit={() => {}}
+                        onDelete={deletePost}
+                        onUpdate={updatePost}
+                    />
+                ))
+            ) : (
+                <div className="post">No posts available.</div>
+            )}
         </div>
     );
 }
