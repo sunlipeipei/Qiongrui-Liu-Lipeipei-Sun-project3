@@ -30,7 +30,12 @@ const LoginForm = () => {
     <div className="login-form-container">
       <form className="login-form" onSubmit={handleLogin}>
         <h2>Login</h2>
-        {error && <p className="error-message">{error}</p>}
+        {error && (
+            <div className="error-message">
+            <p>{error}</p>
+            <button onClick={() => setError('')} className="close-error-button">Close</button>
+          </div>
+        )}
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
