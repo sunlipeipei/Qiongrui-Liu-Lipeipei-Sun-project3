@@ -58,7 +58,12 @@ const SignupPage = () => {
     <div className="signup-page">
       <h1>Sign Up</h1>
       <form className="signup-form" onSubmit={handleSignup}>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMessage && (
+          <div className="error-message">
+            <p>{errorMessage}</p>
+            <button onClick={() => setErrorMessage('')} className="close-error-button">Close</button>
+          </div>
+        )}
         {successMessage && <p className="success-message">{successMessage}</p>}
 
         <div className="form-group">
