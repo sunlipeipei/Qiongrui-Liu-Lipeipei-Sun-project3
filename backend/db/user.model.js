@@ -6,12 +6,6 @@ const UserModel = mongoose.model('User', UserSchema);
 
 // Create a new user
 async function createUser(userData) {
-  // try {
-  //   const user = new UserModel(userData);
-  //   return await user.save();
-  // } catch (error) {
-  //   throw new Error(`Error creating user: ${error.message}`);
-  // }
   const user = new UserModel(userData);
   return await user.save(); 
 }
