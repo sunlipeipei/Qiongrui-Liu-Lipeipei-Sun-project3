@@ -45,7 +45,7 @@ const SignupPage = () => {
       setSuccessMessage('Signup and login successful! Redirecting...');
       setTimeout(() => {
         window.location.href = '/';
-      }, 1000);
+      }, 100);
 
     } catch (error) {
       console.error(error.response?.data || error.message);
